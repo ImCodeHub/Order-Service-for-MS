@@ -28,8 +28,11 @@ public class OrderService {
     private final OrderRepository orderRepository;
 
     public Order placeOrder(Long userId, Long productId, int quantity) {
+        //this will bring the user details by user id.
         UserDto userDto = userClient.getUserById(userId);
+        //this will bring product details by product id.
         ProductDto productDto = productClient.getProductById(productId);
+
         if (productDto.getQuantity() < quantity) {
             throw new RuntimeException(" Insufficient product");
         }
@@ -52,6 +55,7 @@ public class OrderService {
             UserDto userDto = userClient.getUserById(order.getUserId());
             ProductDto productDto = productClient.getProductById(order.getProductId());
             OrderDetail orderDetail = OrderDetail.builder()
+                    .productId(productDto.getId())
                     .userName(userDto.getName())
                     .productName(productDto.getName())
                     .price(order.getTotalPrice())

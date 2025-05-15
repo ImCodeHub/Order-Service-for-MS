@@ -1,14 +1,14 @@
 package com.example.order_service.Controller;
 
 import com.example.order_service.Entity.Order;
+import com.example.order_service.Model.OrderDetail;
 import com.example.order_service.Service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("api/orders")
@@ -24,6 +24,12 @@ public class OrderController {
                                             ){
         Order order = orderService.placeOrder(userId, productId, quantity);
         return new ResponseEntity<>(order, HttpStatus.CREATED);
+    }
+
+    @GetMapping("get-all-order-details")
+    public ResponseEntity<List<OrderDetail>> getAllOrders(){
+        List<OrderDetail> allOrders = orderService.getAllOrders();
+        return new ResponseEntity<>(allOrders, HttpStatus.OK);
     }
 
 

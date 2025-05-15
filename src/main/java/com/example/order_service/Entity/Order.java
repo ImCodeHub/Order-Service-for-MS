@@ -1,13 +1,13 @@
 package com.example.order_service.Entity;
 
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Setter
 @Getter
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name ="orders")
 public class Order {
